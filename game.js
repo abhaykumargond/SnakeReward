@@ -125,8 +125,15 @@ function tryRedeemGiftCard(requiredCoins, giftCardValue) {
         score -= requiredCoins;
         updateScore();
         
-        // Generate and show gift card
-        const giftCardCode = generateGiftCardCode();
+        // Use specific gift card codes based on value
+        let giftCardCode;
+        if (giftCardValue === 10) {
+            giftCardCode = 'ABHA67AYUI78HYU7';
+        } else if (giftCardValue === 20) {
+            giftCardCode = 'ADRT67YTAGTY6KJIU';
+        }
+        
+        // Show redemption modal with the specific code
         showRedemptionModal(giftCardValue, giftCardCode);
         
         // Add to history
@@ -526,17 +533,6 @@ function showCelebration() {
     
     const giftCardCode = generateGiftCardCode();
     document.getElementById('giftCardCode').textContent = giftCardCode;
-}
-
-// Generate gift card code
-function generateGiftCardCode() {
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    let code = '';
-    for (let i = 0; i < 12; i++) {
-        if (i > 0 && i % 4 === 0) code += '-';
-        code += chars[Math.floor(Math.random() * chars.length)];
-    }
-    return code;
 }
 
 // Game over

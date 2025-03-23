@@ -128,7 +128,7 @@ function tryRedeemGiftCard(requiredCoins, giftCardValue) {
         // Use specific gift card codes based on value
         let giftCardCode;
         if (giftCardValue === 10) {
-            giftCardCode = 'ABHA67AYUI78HYU7';
+            giftCardCode = '9P6PTS7EVRUGZRJ5';
         } else if (giftCardValue === 20) {
             giftCardCode = 'ADRT67YTAGTY6KJIU';
         }

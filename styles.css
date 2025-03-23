@@ -1,0 +1,529 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+body {
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: #fff;
+    min-height: 100vh;
+    padding: 20px;
+    animation: gradientBG 15s ease infinite;
+    background-size: 400% 400%;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.game-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+#gameCanvas {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
+}
+
+#gameCanvas:hover {
+    transform: scale(1.01);
+}
+
+.score-container, .high-score {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.score-container:hover, .high-score:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.controls {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+button {
+    background: linear-gradient(45deg, #4CAF50, #45a049);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    margin: 0 10px;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(45deg, #45a049, #4CAF50);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+#muteBtn {
+    background: linear-gradient(45deg, #2196F3, #1976D2);
+}
+
+#muteBtn:hover {
+    background: linear-gradient(45deg, #1976D2, #2196F3);
+}
+
+.celebration {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.celebration.hidden {
+    display: none;
+}
+
+.celebration-content {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    animation: popIn 0.5s ease-out;
+    max-width: 90%;
+    width: 500px;
+}
+
+.gift-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+    transform: perspective(1000px) rotateY(20deg);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.gift-card:hover {
+    transform: perspective(1000px) rotateY(0deg);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+}
+
+.gift-card-inner {
+    position: relative;
+    width: 100%;
+}
+
+.gift-card-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    display: block;
+}
+
+.gift-card-details {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 15px;
+    border-radius: 0 0 10px 10px;
+    color: white;
+}
+
+.gift-card-details h3 {
+    margin: 0 0 10px 0;
+    color: #FFD700;
+}
+
+.gift-card-details p {
+    margin: 0;
+    font-family: monospace;
+    font-size: 1.2em;
+    letter-spacing: 2px;
+    color: #fff;
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.history-section {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.history-container {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.history-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.instructions {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+.instructions ul {
+    list-style-position: inside;
+    margin-top: 15px;
+}
+
+.instructions li {
+    margin: 10px 0;
+    color: #ddd;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #4CAF50, #45a049);
+    border-radius: 5px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #45a049, #4CAF50);
+}
+
+/* Mobile-specific styles */
+.mobile-controls {
+    display: none;  /* Hidden by default, shown on mobile */
+    margin: 20px auto;
+    max-width: 300px;
+}
+
+.control-row {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 5px 0;
+}
+
+.control-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.control-btn:active {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(0.95);
+}
+
+/* Enhanced responsive design */
+@media (max-width: 768px) {
+    .game-container {
+        padding: 10px;
+    }
+
+    .header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    #gameCanvas {
+        width: 100%;
+        height: auto;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .mobile-controls {
+        display: block;
+    }
+
+    .controls {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    button {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .gift-cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .history-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .redeem-content {
+        padding: 15px;
+    }
+
+    .gift-card {
+        margin: 10px 0;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) {
+    .control-btn:hover {
+        transform: none;
+    }
+
+    button:hover {
+        transform: none;
+    }
+
+    .gift-card-option:hover {
+        transform: none;
+    }
+}
+
+.clickable {
+    cursor: pointer;
+    text-decoration: underline;
+    color: #4CAF50;
+}
+
+.clickable:hover {
+    color: #45a049;
+}
+
+.redeem-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.redeem-section.hidden {
+    display: none;
+}
+
+.redeem-content {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    animation: popIn 0.5s ease-out;
+    max-width: 90%;
+    width: 800px;
+}
+
+.available-coins {
+    font-size: 1.2em;
+    margin: 20px 0;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.gift-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.gift-card-option {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 15px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.gift-card-option:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+}
+
+.gift-card-option img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.gift-card-info {
+    text-align: center;
+}
+
+.gift-card-info h3 {
+    color: #FFD700;
+    margin-bottom: 10px;
+}
+
+.redeem-btn {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.redeem-btn:hover {
+    transform: scale(1.05);
+    background: #45a049;
+}
+
+.redeem-btn:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.close-btn {
+    background: #f44336;
+    margin-top: 20px;
+}
+
+.close-btn:hover {
+    background: #d32f2f;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    animation: popIn 0.5s ease-out;
+    max-width: 90%;
+    width: 500px;
+}
+
+.game-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    border-radius: 20px;
+    box-shadow: inset 0 0 50px rgba(255, 255, 255, 0.1);
+}
+
+.score-flash {
+    animation: scoreFlash 0.5s ease-out;
+}
+
+@keyframes scoreFlash {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.food-sparkle {
+    position: absolute;
+    pointer-events: none;
+    animation: sparkle 0.8s linear forwards;
+}
+
+@keyframes sparkle {
+    0% { transform: scale(0) rotate(0deg); opacity: 1; }
+    100% { transform: scale(1.5) rotate(180deg); opacity: 0; }
+} 

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Snake Game - Win Gift Cards!</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <div class="score-container">
+                <span>Coins: </span>
+                <span id="score" class="clickable">0</span>
+            </div>
+            <div class="high-score">
+                <span>High Score: </span>
+                <span id="highScore">0</span>
+            </div>
+        </div>
+
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- Mobile Controls -->
+        <div class="mobile-controls">
+            <div class="control-row">
+                <button class="control-btn up-btn">
+                    <i class="fas fa-chevron-up"></i>
+                </button>
+            </div>
+            <div class="control-row">
+                <button class="control-btn left-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="control-btn down-btn">
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <button class="control-btn right-btn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="startBtn">Start Game</button>
+            <button id="muteBtn"><i class="fas fa-volume-up"></i></button>
+        </div>
+    </div>
+
+    <!-- Redeem Section -->
+    <div id="redeemSection" class="redeem-section hidden">
+        <div class="redeem-content">
+            <h2>Redeem Gift Cards</h2>
+            <div class="available-coins">
+                <span>Available Coins: </span>
+                <span id="availableCoins">0</span>
+            </div>
+            <div class="gift-cards-grid">
+                <div class="gift-card-option">
+                    <img src="giftcard.jpg" alt="₹10 Gift Card" class="gift-card-image">
+                    <div class="gift-card-info">
+                        <h3>₹10 Gift Card</h3>
+                        <p>Cost: 100 coins</p>
+                        <button class="redeem-btn" data-coins="100" data-value="10">Redeem</button>
+                    </div>
+                </div>
+                <div class="gift-card-option">
+                    <img src="giftcard.jpg" alt="₹20 Gift Card" class="gift-card-image">
+                    <div class="gift-card-info">
+                        <h3>₹20 Gift Card</h3>
+                        <p>Cost: 200 coins</p>
+                        <button class="redeem-btn" data-coins="200" data-value="20">Redeem</button>
+                    </div>
+                </div>
+            </div>
+            <button id="closeRedeemBtn" class="close-btn">Close</button>
+        </div>
+    </div>
+
+    <!-- Redemption Success Modal -->
+    <div id="redemptionModal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Congratulations! 🎉</h2>
+            <p>You've successfully redeemed your gift card!</p>
+            <div class="gift-card">
+                <div class="gift-card-inner">
+                    <img src="giftcard.jpg" alt="Gift Card" class="gift-card-image">
+                    <div class="gift-card-details">
+                        <h3 id="modalGiftCardValue">Gift Card</h3>
+                        <p id="modalGiftCardCode"></p>
+                    </div>
+                </div>
+            </div>
+            <button id="closeModalBtn">Close</button>
+        </div>
+    </div>
+
+    <div class="history-section">
+        <h2>Redemption History</h2>
+        <div id="redemptionHistory" class="history-container">
+            <!-- Redemption history will be populated here -->
+        </div>
+    </div>
+
+    <div class="instructions">
+        <h2>How to Play</h2>
+        <ul>
+            <li>Use arrow keys or WASD to control the snake</li>
+            <li>Eat food to grow and earn coins</li>
+            <li>Regular food: 10 coins</li>
+            <li>Special food: 20 coins (appears randomly)</li>
+            <li>Click on your coins to open the redeem section</li>
+            <li>Don't hit yourself</li>
+        </ul>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html> 

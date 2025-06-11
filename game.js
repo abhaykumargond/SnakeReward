@@ -128,9 +128,9 @@ function tryRedeemGiftCard(requiredCoins, giftCardValue) {
         // Use specific gift card codes based on value
         let giftCardCode;
         if (giftCardValue === 10) {
-            giftCardCode = '9P6PTS7EVRUGZRJ5';
+            giftCardCode = '2N1ULLUANH02RGYY';
         } else if (giftCardValue === 20) {
-            giftCardCode = 'ADRT67YTAGTY6KJIU';
+            giftCardCode = '2N1ULLUANH02RGYY';
         }
         
         // Show redemption modal with the specific code

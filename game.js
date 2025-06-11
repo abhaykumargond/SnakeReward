@@ -58,7 +58,8 @@ function init() {
 
     // Set up event listeners
     document.addEventListener('keydown', handleKeyPress);
-    document.getElementById('startBtn').addEventListener('click', startGame);
+    document.getElementById('startBtn').addEventListener('click', showWhatsappModal);
+    document.getElementById('skipWhatsappBtn').addEventListener('click', hideWhatsappModal);
     document.getElementById('muteBtn').addEventListener('click', toggleMute);
     document.getElementById('score').addEventListener('click', showRedeemSection);
     document.getElementById('closeRedeemBtn').addEventListener('click', hideRedeemSection);
@@ -82,6 +83,19 @@ function init() {
     canvas.addEventListener('touchmove', function(e) {
         e.preventDefault();
     }, { passive: false });
+}
+
+// Show WhatsApp modal
+function showWhatsappModal() {
+    const modal = document.getElementById('whatsappModal');
+    modal.classList.remove('hidden');
+}
+
+// Hide WhatsApp modal
+function hideWhatsappModal() {
+    const modal = document.getElementById('whatsappModal');
+    modal.classList.add('hidden');
+    startGame();
 }
 
 // Setup redeem buttons
